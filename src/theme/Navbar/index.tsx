@@ -70,7 +70,7 @@ export default function NavbarWrapper(props) {
             <ThemeIcon className={styles.icon} />
           </button>
           <a
-            href="https://github.com"
+            href="https://github.com/MrClaro/root-algorithms"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.iconBtn}
