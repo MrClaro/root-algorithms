@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+// ============================================================
+// GLOBAL MIXINS
+// ============================================================
+@mixin mono {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@mixin transition($props...) {
+  transition-property: $props;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+// ============================================================
+// TOKENS — LIGHT
+// ============================================================
+:root {
+  // Layout
+  --radius: 0.25rem;
+
+  // Base Colors
+  --background: #f4f6f4;
+  --foreground: #1a2e1a;
+  --card: #edf0ed;
+  --card-foreground: #1a2e1a;
+  --popover: #edf0ed;
+  --popover-foreground: #1a2e1a;
+
+  // Primary — green
+  --primary: #2d7a2d;
+  --primary-foreground: #f4f6f4;
+
+  // Secondary
+  --secondary: #e0e8e0;
+  --secondary-foreground: #2d4a2d;
+
+  // Muted
+  --muted: #e0e8e0;
+  --muted-foreground: #5a7a5a;
+
+  // Accent
+  --accent: #1a8c8c;
+  --accent-foreground: #f4f6f4;
+
+  // Destructive
+  --destructive: #c0392b;
+  --destructive-foreground: #ffffff;
+
+  // Borders and inputs
+  --border: #a8c4a8;
+  --input: #a8c4a8;
+  --ring: #2d7a2d;
+
+  // Terminal extras
+  --terminal-yellow: #c8960a;
+  --terminal-cyan: #0a9a9a;
+  --terminal-magenta: #8c2d8c;
+  --terminal-red: #c0392b;
+  --terminal-blue: #1a5fb4;
+
+  // Infima overrides
+  --ifm-color-primary: #2d7a2d;
+  --ifm-color-primary-dark: #276c27;
+  --ifm-color-primary-darker: #246624;
+  --ifm-color-primary-darkest: #1e551e;
+  --ifm-color-primary-light: #338833;
+  --ifm-color-primary-lighter: #368e36;
+  --ifm-color-primary-lightest: #3da03d;
+  --ifm-background-color: #f4f6f4;
+  --ifm-font-family-base: "JetBrains Mono", "Fira Code", monospace;
+  --ifm-font-family-monospace: "JetBrains Mono", "Fira Code", monospace;
+  --ifm-code-font-size: 95%;
+  --ifm-global-radius: 0.25rem;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
+}
+
+// ============================================================
+// TOKENS — DARK
+// ============================================================
+[data-theme="dark"] {
+  --background: #0d1a0d;
+  --foreground: #a8f0a8;
+  --card: #111e11;
+  --card-foreground: #a8f0a8;
+  --popover: #111e11;
+  --popover-foreground: #a8f0a8;
+
+  --primary: #00ff41;
+  --primary-foreground: #0d1a0d;
+
+  --secondary: #162016;
+  --secondary-foreground: #7ac87a;
+
+  --muted: #162016;
+  --muted-foreground: #4a7a4a;
+
+  --accent: #00cccc;
+  --accent-foreground: #0d1a0d;
+
+  --destructive: #e74c3c;
+  --destructive-foreground: #ffffff;
+
+  --border: #1e3c1e;
+  --input: #1e3c1e;
+  --ring: #00ff41;
+
+  --terminal-yellow: #ffd700;
+  --terminal-cyan: #00ffff;
+  --terminal-magenta: #ff00ff;
+  --terminal-red: #e74c3c;
+  --terminal-blue: #4a9eff;
+
+  --ifm-color-primary: #00ff41;
+  --ifm-color-primary-dark: #00e63a;
+  --ifm-color-primary-darker: #00d936;
+  --ifm-color-primary-darkest: #00b32d;
+  --ifm-color-primary-light: #1aff55;
+  --ifm-color-primary-lighter: #26ff5e;
+  --ifm-color-primary-lightest: #4dff77;
+  --ifm-background-color: #0d1a0d;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+// ============================================================
+// BASE
+// ============================================================
+body {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--primary);
+  }
+}
+
+// ============================================================
+// GLOBAL ANIMATIONS
+// ============================================================
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+[data-theme="dark"] .scanline::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--primary) 3%, transparent),
+    transparent
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+// ============================================================
+// MARKDOWN / DOCS
+// ============================================================
+.markdown {
+  --ifm-heading-color: var(--foreground);
+  --ifm-font-color-base: var(--foreground);
+  --ifm-link-color: var(--primary);
+  --ifm-link-hover-color: var(--primary);
+  --ifm-code-background: var(--secondary);
+  --ifm-blockquote-border-left-color: var(--primary);
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    color: var(--foreground);
+  }
+
+  code {
+    background: var(--secondary);
+    color: var(--primary);
+    border-radius: var(--radius);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--primary);
+    background: var(--secondary);
+    color: var(--muted-foreground);
+  }
+}
+
+// ============================================================
+// SIDEBAR OF DOCS
+// ============================================================
+.theme-doc-sidebar-container {
+  background-color: var(--card) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.menu__link {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted-foreground) !important;
+  border-radius: var(--radius);
+  transition:
+    color 0.15s,
+    background 0.15s;
+
+  &:hover {
+    color: var(--primary) !important;
+    background: var(--secondary) !important;
+  }
+
+  &--active {
+    color: var(--primary) !important;
+    background: var(--secondary) !important;
+    border-left: 2px solid var(--primary);
+  }
+}
+
+.menu__list-item-collapsible:hover {
+  background: var(--secondary) !important;
+}
+
+// ============================================================
+// BLOG
+// ============================================================
+.blog-sidebar {
+  border-right: 1px solid var(--border);
+
+  &__title {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-foreground);
+  }
+
+  &__item a {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--muted-foreground);
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+  }
+}
+
+article.margin-bottom--xl {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+  margin-bottom: 2rem !important;
+}
+
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    text-decoration: none;
+  }
+}
+
+// ============================================================
+// ADMONITIONS ( note, warning...)
+// ============================================================
+.alert {
+  border-radius: var(--radius);
+  border-left: 3px solid var(--primary);
+  background-color: var(--secondary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+
+  &--info {
+    border-left-color: var(--terminal-cyan);
+  }
+  &--warning {
+    border-left-color: var(--terminal-yellow);
+  }
+  &--danger {
+    border-left-color: var(--terminal-red);
+  }
+}
+
+// ============================================================
+// PAGINATION
+// ============================================================
+.pagination-nav__link {
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+  font-family: "JetBrains Mono", monospace;
+
+  &:hover {
+    border-color: var(--primary) !important;
+  }
+}
+
+// ============================================================
+// SEARCH LOCAL
+// ============================================================
+
+[class*="searchInput"],
+[class*="navbar__search-input"] {
+  @include mono;
+  background-color: var(--secondary) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  font-size: 0.78rem !important;
+  @include transition(border-color);
+
+  &::placeholder {
+    color: var(--muted-foreground) !important;
+    @include mono;
+  }
+
+  &:focus {
+    border-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent) !important;
+  }
+}
+
+[class*="searchHint"],
+[class*="keys"] {
+  @include mono;
+  color: var(--muted-foreground) !important;
+}
