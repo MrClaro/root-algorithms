@@ -46,7 +46,7 @@ export default function HeroSection() {
             Começar a Aprender
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/MrClaro/root-algorithms"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnOutline}

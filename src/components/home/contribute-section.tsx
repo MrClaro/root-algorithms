@@ -14,7 +14,7 @@ export default function ContributeSection() {
         a comunidade a crescer.
       </p>
       <a
-        href="https://github.com"
+        href="https://github.com/MrClaro/root-algorithms/pulls"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.contributeBtn}
