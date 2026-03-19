@@ -1,0 +1,122 @@
+@mixin mono {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@mixin transition($props...) {
+  transition-property: $props;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+.footer {
+  border-top: 1px solid var(--border);
+  background-color: var(--card);
+  padding: 3rem 2rem 2rem;
+}
+
+// ============================================================
+// SUPERIOR BAR
+// ============================================================
+.terminalBar {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+.terminalBarText {
+  @include mono;
+  font-size: 0.7rem;
+  color: var(--border);
+  white-space: nowrap;
+
+  [data-theme="dark"] & {
+    color: color-mix(in srgb, var(--primary) 30%, transparent);
+  }
+}
+
+// ============================================================
+// LINK COLUMNS
+// ============================================================
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto 2.5rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.columnTitle {
+  @include mono;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.promptSymbol {
+  color: var(--primary);
+}
+
+.columnList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.columnItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.arrow {
+  color: var(--primary);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+}
+
+.link {
+  @include mono;
+  @include transition(color);
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+}
+
+// ============================================================
+// COPYRIGHT
+// ============================================================
+.copyright {
+  @include mono;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  text-align: center;
+  opacity: 0.3;
+}
+
+.copyrightText {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
