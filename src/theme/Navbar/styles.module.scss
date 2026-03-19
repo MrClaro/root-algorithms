@@ -1,0 +1,160 @@
+@mixin mono {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@mixin transition($props...) {
+  transition-property: $props;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+// ============================================================
+// NAVBAR
+// ============================================================
+.navbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+// ============================================================
+// LOGO
+// ============================================================
+.logo {
+  @include mono;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.logoSymbol {
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.logoText {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 10px color-mix(in srgb, var(--primary) 50%, transparent),
+    0 0 20px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.logoSuffix {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.cursor {
+  width: 8px;
+  height: 16px;
+  background-color: var(--primary);
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+// ============================================================
+// NAV LINKS
+// ============================================================
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 1rem;
+}
+
+.navLink {
+  @include mono;
+  @include transition(color);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+
+  &:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+}
+
+// ============================================================
+// ACTIONS
+// ============================================================
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.iconBtn {
+  @include mono;
+  @include transition(color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+}
