@@ -1,0 +1,90 @@
+---
+sidebar_position: 2
+---
+
+import BigOComplexity from "@site/src/components/chapter-1/diagrams/big-o/big-o-complexity";
+import BigOTable from "@site/src/components/chapter-1/diagrams/big-o/big-o-table";
+import BigOChart from "@site/src/components/chapter-1/diagrams/big-o/big-o-chart";
+
+# Big O
+
+<!--toc:start-->
+
+- [Big O](#big-o)
+  - [Conceito](#conceito)
+  - [Tipos de Complexidade](#tipos-de-complexidade)
+  - [O detalhe do "Pior Caso"](#o-detalhe-do-pior-caso)
+  - [Complexidade de Espaço](#complexidade-de-espaço)
+  - [Tabela visual](#tabela-visual)
+  - [Gráfico](#gráfico)
+  <!--toc:end-->
+
+## Conceito
+
+O Big O é uma notação matemática que não mede tempo em segundos — isso dependeria do hardware — mas sim o **crescimento de operações** à medida que a entrada **(n)** aumenta. Ele é usado para descrever a eficiência de um algoritmo em termos de tempo de execução e uso de memória.
+
+Vale mencionar que existem três notações relacionadas:
+
+- **O (Big O):** limite superior — o **pior caso**. É o que usamos por padrão.
+- **Ω (Big Omega):** limite inferior — o **melhor caso**.
+- **Θ (Big Theta):** quando pior e melhor caso são iguais — o **caso exato**.
+
+Na prática, quando alguém fala "Big O de um algoritmo", está se referindo ao pior caso — a situação em que o algoritmo leva o máximo de tempo possível.
+
+## Tipos de Complexidade
+
+<BigOComplexity />
+
+- **O(1): Complexidade constante** — o tempo de execução é o mesmo independentemente do tamanho da entrada. Exemplo: acessar um elemento em um array pelo índice.
+
+- **O(log n): Complexidade logarítmica** — o tempo cresce proporcionalmente ao logaritmo da entrada. A cada passo, o problema é cortado pela metade. Exemplo: busca binária.
+
+- **O(n): Complexidade linear** — o tempo cresce proporcionalmente ao tamanho da entrada. Exemplo: percorrer um array para encontrar um elemento.
+
+- **O(n log n): Complexidade linear-logarítmica** — combina divisão e conquista. Muito mais eficiente que quadrático para grandes entradas. Exemplo: Merge Sort, Quick Sort.
+
+- **O(n^2): Complexidade quadrática** — o tempo cresce com o quadrado da entrada. Dois loops aninhados é o caso mais comum. Exemplo: Bubble Sort, comparar cada elemento com todos os outros.
+
+## O detalhe do "Pior Caso"
+
+Ao falar sobre Big O, sempre nos referimos ao **pior caso** — o limite máximo de esforço que o algoritmo pode ter.
+
+Por exemplo, em **O(n)**: se a palavra que você procura for a primeira do dicionário, o tempo de busca seria **O(1)**. Mas se for a última, o tempo é **O(n)**. O Big O captura esse limite máximo, garantindo que o algoritmo **nunca será pior** do que aquilo.
+
+Isso é importante porque no mundo real você não controla os dados de entrada — e um algoritmo que é rápido no melhor caso mas lento no pior pode ser um problema sério em produção.
+
+## Complexidade de Espaço
+
+Além da complexidade de tempo, o Big O também descreve a **complexidade de espaço** — a quantidade de memória extra que um algoritmo usa em relação ao tamanho da entrada.
+
+- **O(1) de espaço:** o algoritmo usa uma quantidade constante de memória, independentemente de $n$. Ele opera "dentro" da própria estrutura de dados original, sem criar cópias.
+
+- **O(n) de espaço:** o algoritmo precisa criar uma nova estrutura proporcional ao tamanho da entrada.
+
+```js
+// O(1) de espaço — apenas variáveis simples, sem estruturas extras
+function soma(arr) {
+  let total = 0; // uma variável, independente do tamanho do arr
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+
+// O(n) de espaço — cria um novo array do mesmo tamanho
+function dobrar(arr) {
+  const resultado = []; // cresce proporcionalmente ao arr
+  for (let i = 0; i < arr.length; i++) {
+    resultado.push(arr[i] * 2);
+  }
+  return resultado;
+}
+```
+
+## Tabela visual
+
+<BigOTable />
+
+## Gráfico
+
+<BigOChart />
