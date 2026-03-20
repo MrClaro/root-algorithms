@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+---
+
+import RamLayout from "../../src/components/chapter-1/diagrams/ram/ram-layout";
+import CacheLocality from "../../src/components/chapter-1/diagrams/ram/cache-locality";
+import StackFrames from "../../src/components/chapter-1/diagrams/ram/stack-frames";
+
+# Memória RAM
+
+<!--toc:start-->
+
+- [RAM](#ram)
+  - [Conceito](#conceito)
+  - [Como visualizar a RAM](#como-visualizar-a-ram)
+  - [Cache Locality](#cache-locality)
+  - [Alocação Dinâmica VS. Estática](#alocação-dinâmica-vs-estática)
+  - [Stack](#stack)
+  - [Heap](#heap)
+  - [Garbage Collector (GC)](#garbage-collector-gc)
+  - [Volatilidade](#volatilidade)
+  <!--toc:end-->
+
+## Conceito
+
+A memória de acesso aleatório (RAM) ou _Random Access Memory_ é um tipo de memória de computador que pode ser acessada aleatoriamente, ou seja, qualquer byte de memória pode ser acessado diretamente sem precisar percorrer outros bytes. A RAM é usada para armazenar dados e instruções que o processador precisa acessar rapidamente enquanto executa programas.
+
+Quando trazemos esse conceito para o mundo da estrutura de dados e algoritmos, a RAM é importante porque muitos algoritmos dependem do acesso rápido à memória para serem eficientes. Por exemplo, quando um algoritmo precisa acessar um elemento específico em um array, ele pode fazê-lo em tempo constante **O(1)** graças à natureza da RAM.
+
+Entender como ela funciona é crucial para otimizar nossos algoritmos. Por mais que o foco costume ser na complexidade de tempo, a complexidade de espaço também é um fator importante, e a RAM é um componente essencial para entender como os algoritmos utilizam a memória.
+
+## Como visualizar a RAM
+
+Podemos imaginar a RAM como uma estante de livros, onde cada livro representa um byte de memória. Cada livro tem um número de identificação (endereço) e pode conter informações (dados). Quando um programa precisa acessar um dado específico, ele pode ir diretamente ao livro correspondente usando o número de identificação, sem precisar ler os outros livros. Isso é o que torna a RAM tão eficiente para acesso rápido a dados.
+
+Ela funciona com base na estrutura **chave e valor**, onde o endereço é a chave e o conteúdo armazenado é o valor. Isso permite que os programas acessem rapidamente os dados necessários para executar suas tarefas.
+
+<RamLayout />
+
+## Cache Locality
+
+A RAM também é importante para entender o conceito de _cache locality_, que se refere à tendência dos programas de acessar dados que estão próximos uns dos outros na memória. Existem dois tipos principais: temporal e espacial.
+
+O processador possui uma memória mais rápida chamada **cache**. Quando ele busca um dado na RAM, ele traz consigo um bloco de dados adjacentes (o que chamamos de **Cache Line**). Se um programa acessa dados próximos, é provável que eles já estejam no cache, melhorando o desempenho. É por isso que percorrer um array é muito mais rápido que uma lista encadeada; os elementos do array estão armazenados contiguamente na RAM, enquanto na lista encadeada eles podem estar espalhados, forçando o processador a ir na RAM toda hora (o que chamamos de **Cache Miss**).
+
+<CacheLocality />
+
+## Alocação Dinâmica VS. Estática
+
+- **Alocação Estática:** Ocorre quando a quantidade de memória necessária é determinada em tempo de compilação. Exemplo: declarar um array com tamanho fixo.
+- **Alocação Dinâmica:** Ocorre quando a quantidade de memória é determinada em tempo de execução. Exemplo: listas encadeadas, onde podemos adicionar elementos conforme necessário.
+
+Podemos exemplificar isso com a **Pilha (Stack)** e o **Heap**. A pilha segue o princípio **LIFO** (_Last In, First Out_) e é geralmente alocada estaticamente; se a recursão for infinita, ocorre o _Stack Overflow_(Sim, o nome do site). Já o **Heap** é usado para alocação dinâmica, onde os programas solicitam e liberam memória conforme necessário. O heap é mais flexível, mas requer gerenciamento cuidadoso para evitar vazamentos de memória e fragmentação.
+
+## Stack
+
+A stack é uma região da RAM onde a memória é alocada de forma automática e organizada. Ela é usada para armazenar variáveis locais, parâmetros de função e informações de controle de execução (como o endereço de retorno). A alocação na pilha é rápida, mas tem um tamanho limitado, o que pode levar a erros como _Stack Overflow_ se o programa tentar usar mais memória do que a pilha pode suportar.
+
+<StackFrames />
+
+## Heap
+
+O Heap é uma região da RAM onde a memória é alocada dinamicamente. Ele é usado para armazenar objetos e dados que precisam de uma vida útil mais longa do que a pilha. A alocação no heap é mais lenta do que na pilha, mas oferece maior flexibilidade, permitindo que os programas criem estruturas de dados complexas e dinâmicas.
+
+## Garbage Collector (GC)
+
+Em linguagens de alto nível (como Java, JavaScript e TypeScript), o programador não precisa liberar manualmente a memória alocada no **Heap**. Para isso existe o **Garbage Collector**.
+
+O GC é um processo automático que monitora os objetos no Heap para identificar quais não estão mais sendo utilizados pelo programa (ou seja, não possuem mais referências apontando para eles). Quando o GC identifica esses objetos "órfãos", ele libera o espaço que eles ocupavam na RAM. Isso facilita o desenvolvimento e previne muitos erros de vazamento de memória (_Memory Leaks_), embora possa causar pequenos picos de uso de CPU enquanto o coletor está trabalhando.
+
+## Volatilidade
+
+A RAM é uma memória **volátil**, o que significa que ela perde seu conteúdo quando a energia é desligada. Isso ocorre porque ela armazena dados usando circuitos eletrônicos que dependem de energia constante para manter as informações.
+
+:::danger[CUIDADO]
+Não confunda o Heap de Memória (espaço na RAM para objetos) com a Estrutura de Dados Heap (uma árvore binária usada em algoritmos). Apesar do nome igual, o Heap da memória não é organizado como a estrutura de dados Heap.
+:::
+
+:::tip[DICA]
+Ao contrário do Heap, a Stack de Memória (espaço na RAM para execução de funções) e a Estrutura de Dados Stack são essencialmente a mesma coisa. Ambas funcionam baseadas no princípio LIFO (Last In, First Out). O que muda é apenas o contexto: uma é gerenciada automaticamente pelo hardware/sistema para rodar seu código, e a outra é uma estrutura que você mesmo pode implementar para resolver problemas lógicos.
+:::

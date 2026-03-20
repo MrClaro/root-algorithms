@@ -1,0 +1,8 @@
+{
+  "label": "Capítulo 1 - Os Fundamentos",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "O capítulo 1 tem como objetivo te ensinar a base que todo programador deve ter antes de aprender algoritmos e estruturas de dados."
+  }
+}
