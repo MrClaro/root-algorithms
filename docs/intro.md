@@ -2,46 +2,23 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Root Algorithms
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Bem-vindo ao **Root Algorithms**! Este é um projeto [open-source](https://github.com/MrClaro/root-algorithms) dedicado a ensinar algoritmos de forma clara e acessível. Aqui você encontrará algoritmos explicados passo a passo, com exemplos práticos e código-fonte disponível para estudo.
 
-## Getting Started
+Nosso objetivo é tornar o aprendizado de algoritmos mais fácil e direto para todos, independentemente do nível de experiência — seja você iniciante ou programador experiente.
 
-Get started by **creating a new site**.
+## O que você encontrará aqui
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- **Explicações detalhadas** — cada algoritmo é apresentado de forma clara, com exemplos visuais e analogias para facilitar a compreensão.
+- **Código-fonte** — implementações em várias linguagens para que você veja como os algoritmos funcionam na prática.
+- **Exercícios práticos** — desafios para testar seu conhecimento e aplicar o que aprendeu.
+- **Comunidade ativa** — participe para discutir algoritmos, compartilhar conhecimento e aprender com outros entusiastas.
 
-### What you'll need
+## Como começar
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+Este projeto é voltado para o ensino de algoritmos, não para a implementação de soluções específicas. Os algoritmos apresentados são genéricos e podem ser adaptados para diferentes contextos. Usamos **JavaScript** como linguagem base pelo sua sintaxe acessível e curva de aprendizado mediana — o que facilita transferir o raciocínio para Python, Java ou qualquer outra linguagem.
 
-## Generate a new site
+O conteúdo é dividido em **capítulos temáticos**, cada um focado em um tipo específico de algoritmo: ordenação, busca, grafos, entre outros. O material foi planejado para ser seguido em ordem, já que os conceitos se constroem progressivamente — recomendamos respeitar a sequência para garantir uma base sólida antes de avançar para tópicos mais complexos.
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Explore os capítulos, pratique com o código-fonte e não hesite em participar da comunidade se tiver dúvidas ou sugestões. Vamos aprender juntos!
