@@ -1,0 +1,164 @@
+---
+sidebar_position: 3
+---
+
+import BaseConverter from "@site/src/components/chapter-1/diagrams/numeric-systems/base-converter";
+import ValueVsReference from "@site/src/components/chapter-1/diagrams/numeric-systems/value-vs-reference";
+import OverflowSimulator from "@site/src/components/chapter-1/diagrams/numeric-systems/overflow-simulator";
+import DataTypesTable from "@site/src/components/chapter-1/diagrams/numeric-systems/data-types-table";
+
+# Sistemas de Numeração e Tipos
+
+<!--toc:start-->
+
+- [Sistemas de Numeração e Tipos](#sistemas-de-numeração-e-tipos)
+  - [Conceito](#conceito)
+  - [Sistemas de Numeração](#sistemas-de-numeração)
+    - [Como ler um número hexadecimal](#como-ler-um-número-hexadecimal)
+  - [Como uma linguagem de programação lida com números?](#como-uma-linguagem-de-programação-lida-com-números)
+  - [Tipos de dados essenciais](#tipos-de-dados-essenciais)
+    - [Tipos de Valor vs. Tipos de Referência](#tipos-de-valor-vs-tipos-de-referência)
+    - [Tipos de Valor (Primitivos)](#tipos-de-valor-primitivos)
+    - [Tipos de Referência (Objetos/Arrays)](#tipos-de-referência-objetosarrays)
+    - [Por que isso importa para algoritmos?](#por-que-isso-importa-para-algoritmos)
+    <!--toc:end-->
+
+## Conceito
+
+A partir do momento em que começamos a programar, lidamos com números — seja para contar, medir ou representar dados. Mas como os computadores entendem esses números? E quais tipos de números existem?
+
+A [RAM](../capitulo-1-os-fundamentos/memoria-ram) só entende dois estados, que podem ser entendidos como: ligado (1) e desligado (0). A partir disso, todos os tipos de dados são construídos. Pensando nessa estrutura base de 0s e 1s, vamos ver o que molda todos os tipos de dados:
+
+- **O Bit:** é a menor unidade de informação, representando um único dígito binário (0 ou 1).
+- **O Byte:** é composto por 8 bits e pode representar 256 valores diferentes (de 0 a 255), onde 256 representa `2^8`, vale ressaltar que originalmente o ASCII usava apenas 7 bits(128 caracteres), O 8º bit foi usado posteriormente para extensões, o que permitiu codificar o alfabeto ocidental inteiro básico (ASCII).
+
+## Sistemas de Numeração
+
+É importante entender os sistemas de numeração, pois eles são a base para a representação de dados em um computador. E é mais importante ainda que um programador não se assuste ao ver um `0xAB` ou um `0b1010`.
+
+- **Decimal:** a base que os humanos usam no dia a dia, composta por 10 dígitos (0–9). Cada posição representa uma potência de 10.
+- **Binário:** a base dos computadores, composta por 2 dígitos (0 e 1). Cada posição representa uma potência de 2. Em código, números binários são prefixados com `0b` — por exemplo, `0b1010` = 10 em decimal.
+- **Hexadecimal:** uma base mais compacta, composta por 16 dígitos, onde cada dígito hex representa 4 bits. Os dígitos vão de 0 a 9 e depois de A a F (onde A=10, B=11, ..., F=15). Em código, são prefixados com `0x` — por exemplo, `0xAB` = 171 em decimal.
+
+### Como ler um número hexadecimal
+
+`0xAB` não é um código secreto — é só uma forma compacta de escrever um número:
+
+```
+0xAB
+  A = 10  →  10 × 16¹ = 160
+  B = 11  →  11 × 16⁰ =  11
+                    total = 171
+```
+
+E o mesmo número em binário:
+
+```
+0b10101011
+  1×2⁷ + 0×2⁶ + 1×2⁵ + 0×2⁴ + 1×2³ + 0×2² + 1×2¹ + 1×2⁰
+= 128  +  0   +  32  +  0   +  8   +  0   +  2   +  1
+= 171
+```
+
+Os três sistemas representam o mesmo valor — só mudam a notação. Hex é especialmente útil porque 2 dígitos hex representam exatamente 1 byte, tornando endereços de memória como `0xFF04` muito mais legíveis do que sua versão binária de 16 dígitos.
+
+<BaseConverter />
+
+## Como uma linguagem de programação lida com números?
+
+Uma linguagem de programação tem tipos de dados específicos para representar números, e cada tipo tem suas próprias características — o intervalo de valores que pode representar e a quantidade de memória que ocupa.
+
+Esses dados normalmente seguem o padrão [**IEEE 754**](https://en.wikipedia.org/wiki/IEEE_754), que define como os números de ponto flutuante são representados. Ele divide os bits disponíveis em três partes:
+
+- **Sinal** (1 bit): positivo ou negativo
+- **Expoente** (8 ou 11 bits): a magnitude do número
+- **Mantissa** (23 ou 52 bits): a precisão — os dígitos significativos
+
+Isso explica por que `0.1 + 0.2 !== 0.3` em JavaScript — o número 0.1 não tem representação binária exata, assim como 1/3 não tem representação decimal exata. Isso ocorre porque $0.1$ em binário é uma dízima periódica (como $1/3$ em decimal), forçando o computador a arredondar o valor e gerando essa pequena diferença.
+
+### Tipos de dados essenciais
+
+- **Booleanos (Boolean):** representam valores de verdade (`true` ou `false`). Conceitualmente ocupam 1 bit, mas na prática a maioria das linguagens aloca 1 byte por questões de alinhamento de memória.
+
+- **Inteiros (Integer):** representam números inteiros como 1, -5, 42. Podem vir em tamanhos diferentes (`short`, `int`, `long`), cada um com um intervalo específico. O `int` padrão ocupa 4 bytes (32 bits), o que permite representar valores de -2.147.483.648 a 2.147.483.647.
+
+- **Flutuantes (Float):** representam números com parte decimal, como 3.14 ou -0.001. O `float` ocupa 32 bits e o `double` ocupa 64 bits — quanto mais bits, maior a precisão.
+
+- **Caracteres (Char):** representam um único caractere como `'a'`, `'1'` ou `'@'`. Ocupam 1 byte na codificação ASCII (256 caracteres possíveis). Para suportar outros idiomas e símbolos, linguagens modernas usam UTF-8, onde um caractere pode ocupar de 1 a 4 bytes.
+
+- **Strings:** sequências de caracteres como `"Olá, Mundo!"`. Ocupam memória variável, proporcional ao comprimento. Tecnicamente são arrays de chars.
+
+<DataTypesTable />
+
+:::note[NOTA]
+Em JavaScript, todos os números são `double` por padrão (64 bits, IEEE 754). Não existe `int` nativo — mesmo `42` é armazenado como ponto flutuante. Isso é um detalhe importante para quem vem de Java ou C.
+:::
+
+## Tipos de Valor vs. Tipos de Referência
+
+Este é o tópico mais importante para qualquer um que queira estudar algoritmos, e é aqui que eu queria chegar desde o começo. Existem dois tipos de dados: os **tipos de valor** e os **tipos de referência**.
+
+### Tipos de Valor (Primitivos)
+
+São simples e ficam na **Stack**. Eles armazenam o valor diretamente na variável. Quando você faz `b = a`, uma cópia independente do valor é criada — modificar `b` não afeta `a`.
+
+Exemplos: booleanos, inteiros, flutuantes e caracteres.
+
+```js
+let a = 10;
+let b = a; // b recebe uma CÓPIA do valor
+b = 99;
+
+console.log(a); // 10 — não foi afetado
+console.log(b); // 99
+```
+
+### Tipos de Referência (Objetos/Arrays)
+
+São complexos e ficam no **Heap**. A variável não armazena o valor em si — armazena um **endereço** (referência) que aponta para onde o valor está na memória. Quando você faz `b = a`, ambas as variáveis passam a apontar para o mesmo lugar.
+
+Exemplos: arrays, objetos e strings (em algumas linguagens).
+
+```js
+let a = [1, 2, 3];
+let b = a; // b recebe o ENDEREÇO de a, não uma cópia
+
+b.push(4);
+
+console.log(a); // [1, 2, 3, 4] — foi afetado!
+console.log(b); // [1, 2, 3, 4]
+```
+
+Esse comportamento é uma das fontes mais comuns de bugs em JavaScript — especialmente quando você passa objetos como argumentos para funções sem perceber que está passando uma referência.
+
+<ValueVsReference />
+
+:::tip[ANÁLOGIA]
+Pense nos Tipos de Valor como o objeto real que você carrega no bolso. Já os Tipos de Referência são como a chave de um armário: se você der uma cópia da chave para um amigo (b = a), ambos podem abrir o mesmo armário e mudar o que está lá dentro.
+:::
+
+:::note[NOTA]
+No JavaScript, os tipos primitivos (boolean, number, string, null, undefined, symbol, bigint) se comportam como tipos de valor.
+No entanto, strings são imutáveis. Embora pareçam objetos por possuírem métodos, elas se comportam como tipos de valor: quando você altera uma string, o motor do JS cria uma nova na memória em vez de modificar a anterior.
+:::
+
+### Por que isso importa para algoritmos?
+
+Dois motivos principais: **overflow** e **performance**.
+
+**Overflow** acontece quando você tenta armazenar um número maior do que o tipo suporta. O valor não gera um erro — ele simplesmente "dá a volta" (wrap around):
+
+```js
+// Exemplo em C (int de 32 bits)
+int x = 2147483647;  // valor máximo de um int
+x = x + 1;
+// x agora é -2147483648 — voltou para o mínimo negativo
+```
+
+<OverflowSimulator />
+
+**Underflow** é o oposto — tentar representar um número menor do que o tipo permite, resultando em zero ou no menor valor possível.
+
+Para algoritmos isso é crítico: um índice de array que sofre overflow pode apontar para uma posição inválida de memória, um contador que estoura pode criar um loop infinito, e cálculos financeiros com `float` podem acumular erros de precisão silenciosos.
+
+**Performance:** além do risco de erros, tipos de valor são processados muito mais rápido pelo processador (acesso direto na Stack), enquanto tipos de referência exigem que o computador busque o endereço e depois vá até o Heap encontrar o dado real.
