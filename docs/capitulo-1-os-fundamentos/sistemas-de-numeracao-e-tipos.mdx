@@ -148,6 +148,8 @@ Dois motivos principais: **overflow** e **performance**.
 
 **Overflow** acontece quando você tenta armazenar um número maior do que o tipo suporta. O valor não gera um erro — ele simplesmente "dá a volta" (wrap around):
 
+**Underflow** é o oposto — tentar representar um número menor do que o tipo permite, resultando em zero ou no menor valor possível.
+
 ```js
 // Exemplo em C (int de 32 bits)
 int x = 2147483647;  // valor máximo de um int
@@ -156,8 +158,6 @@ x = x + 1;
 ```
 
 <OverflowSimulator />
-
-**Underflow** é o oposto — tentar representar um número menor do que o tipo permite, resultando em zero ou no menor valor possível.
 
 Para algoritmos isso é crítico: um índice de array que sofre overflow pode apontar para uma posição inválida de memória, um contador que estoura pode criar um loop infinito, e cálculos financeiros com `float` podem acumular erros de precisão silenciosos.
 
